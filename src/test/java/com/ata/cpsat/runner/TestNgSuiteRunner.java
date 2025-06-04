@@ -4,6 +4,7 @@ import com.ata.cpsat.framework.builder.ChromeProfileBuilder;
 import com.ata.cpsat.framework.builder.FirefoxProfileBuilder;
 import com.ata.cpsat.framework.driver.DriverFactory;
 import com.ata.cpsat.framework.enums.Browser;
+import com.ata.cpsat.framework.helper.SyncHelper;
 import com.ata.cpsat.framework.utility.SystemUtility;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.logging.log4j.LogManager;
@@ -14,6 +15,8 @@ import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Optional;
 import org.testng.annotations.Parameters;
+
+import java.time.Duration;
 
 public class TestNgSuiteRunner {
     private static final Logger logger = LogManager.getLogger(TestNgSuiteRunner.class.getName());
@@ -32,7 +35,6 @@ public class TestNgSuiteRunner {
                 .disableInfoBars()
                 .downloadDirectoryAs(SystemUtility.getDefaultTempFilePath())
                 .disableDefaultBrowserCheck()
-                //.withExtension(USER_DIR.concat(FILE_SEPARATOR).concat("browser-extension").concat(FILE_SEPARATOR).concat("Ultimate AdBlocker_2_2_6_0.crx"))
                 .build();
 
         FirefoxOptions firefoxOptions = FirefoxProfileBuilder.getInstance()
@@ -49,6 +51,7 @@ public class TestNgSuiteRunner {
 
     @AfterTest(alwaysRun = true)
     public void cleanUpTestNgRunEnvironment() {
+        SyncHelper.hardWait(Duration.ofSeconds(5));
         DriverFactory.getInstance().closeBrowser();
     }
 }

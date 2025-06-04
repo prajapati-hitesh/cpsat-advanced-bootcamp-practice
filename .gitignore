@@ -17,7 +17,7 @@ buildNumber.properties
 .classpath
 
 /target/
-/automatio-logs/
+/automation-logs/
 /logs/
-/screenshot/
+/screenshots/
 /.idea/
