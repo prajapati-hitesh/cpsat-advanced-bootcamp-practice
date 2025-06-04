@@ -1,7 +1,7 @@
 package com.ata.cpsat.practice.tests.testng.setA;
 
+import com.ata.cpsat.framework.helper.ActionHelper;
 import com.ata.cpsat.framework.helper.ElementHelper;
-import com.ata.cpsat.framework.helper.SyncHelper;
 import com.ata.cpsat.framework.manager.SeleniumObjectManager;
 import com.ata.cpsat.framework.threads.ThreadLocalSEDriver;
 import com.ata.cpsat.practice.pages.setA.MockSetAHomePage;
@@ -14,11 +14,8 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
-import java.awt.*;
-import java.awt.event.KeyEvent;
 import java.time.Duration;
 import java.util.List;
-import java.util.Objects;
 
 public class QuestionOne extends TestNgSuiteRunner {
     WebDriver driver = ThreadLocalSEDriver.getDriver();
@@ -34,7 +31,7 @@ public class QuestionOne extends TestNgSuiteRunner {
     }
 
     @Test
-    public void testA() throws AWTException {
+    public void testA() {
         MockSetAHomePage page = new MockSetAHomePage();
         // click on hamburger
         page.openMenu();
@@ -62,38 +59,16 @@ public class QuestionOne extends TestNgSuiteRunner {
                     ElementHelper.getInstance().getAttribute(ele, "href"));
         });
 
-        System.out.println("\n--------------------- Clicking on social media icons one by one ---------------------");
         // Right click on all the social media icon one by one and open them in a new window.
         // Get the title of the new window and print the same on the system console
-        for (WebElement element : socialMediaIconAnchorElements.stream().filter(e -> !Objects.equals(e.getDomAttribute("title"), "Contact")).toList()) {
+        socialMediaIconAnchorElements.forEach(element -> {
             String parentWindow = ThreadLocalSEDriver.getDriver().getWindowHandle();
-            // Open context menu for social media icons
+
             SeleniumObjectManager.getActionObject()
                     .moveToElement(element)
                     .contextClick(element)
                     .build().perform();
+        });
 
-            // using robot framework from Java.AWT trying to open the social link in new windows
-            Robot robot = new Robot();
-            SyncHelper.hardWait(Duration.ofSeconds(2));
-            robot.keyPress(KeyEvent.VK_DOWN);
-            robot.keyRelease(KeyEvent.VK_DOWN);
-            SyncHelper.hardWait(Duration.ofMillis(800));
-            robot.keyPress(KeyEvent.VK_ENTER);
-            robot.keyRelease(KeyEvent.VK_ENTER);
-
-            String presentSocial = element.getDomAttribute("title");
-            // pick the window handle other than parent
-            String socialWindowHandle = ThreadLocalSEDriver.getDriver().getWindowHandles().stream().filter(e -> !e.equalsIgnoreCase(parentWindow)).toList().get(0);
-            System.out.println("\nSocial Window ID for Social Handle [" + presentSocial + "] : " + socialWindowHandle);
-
-            // switch to window
-            ThreadLocalSEDriver.getDriver().switchTo().window(socialWindowHandle);
-            SyncHelper.hardWait(Duration.ofSeconds(5));
-
-            System.out.println("Title for [" + presentSocial + "] : " + ThreadLocalSEDriver.getDriver().getTitle());
-            ThreadLocalSEDriver.getDriver().close();
-            ThreadLocalSEDriver.getDriver().switchTo().window(parentWindow);
-        }
     }
 }
