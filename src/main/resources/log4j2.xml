@@ -31,7 +31,7 @@
     </Appenders>
 
     <Loggers>
-        <Logger name="com.hitesh.cpsat" level="debug" additivity="false">
+        <Logger name="com.ata.cpsat" level="debug" additivity="false">
             <AppenderRef ref="Console"/>
             <AppenderRef ref="RollingFile"/>
         </Logger>

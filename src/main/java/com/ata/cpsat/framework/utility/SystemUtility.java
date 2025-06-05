@@ -1,5 +1,8 @@
 package com.ata.cpsat.framework.utility;
 
+import java.io.File;
+import java.nio.file.FileSystems;
+
 public class SystemUtility {
 
     /**
@@ -13,7 +16,7 @@ public class SystemUtility {
      * @return Character that separates components of a file path. This is "/" on UNIX and "\" on Windows.
      */
     public static String getFileSeparator() {
-        return System.getProperty("file.separator");
+        return FileSystems.getDefault().getSeparator();
     }
 
     /**
@@ -43,7 +46,7 @@ public class SystemUtility {
      * @return Path separator character used in java.class.path
      */
     public static String getPathSeparator() {
-        return System.getProperty("path.separator");
+        return File.pathSeparator;
     }
 
     /**
