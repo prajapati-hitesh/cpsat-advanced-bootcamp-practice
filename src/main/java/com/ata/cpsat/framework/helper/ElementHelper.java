@@ -965,6 +965,7 @@ public class ElementHelper {
         return Color.fromString(element.getCssValue("background-color")).asHex();
     }
 
+
     public String getElementColorAsRGB(WebElement element) {
         return element.getCssValue("color");
     }

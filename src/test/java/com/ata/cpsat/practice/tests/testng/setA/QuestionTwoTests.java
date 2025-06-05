@@ -90,7 +90,7 @@ public class QuestionTwoTests extends TestNgSuiteRunner {
     public void writeTestResultsToExcel() {
         ExcelUtility.writeExcelFromMapList(
                 resultRowsForWrite,
-                RESULT_EXCEL_PATH.concat("CPSAT-Mock-Exam-SET-A-2022-Java_Q2_result_").concat(DateUtility.getCurrentTimeStampWithFormatAs("dd-MM-yyyy_HH.mm.ss")).concat(".xlsx"),
+                RESULT_EXCEL_PATH.concat("CPSAT-Mock-Exam-SET-A-2022-Java_Q2_result_").concat(DateUtility.getCurrentTimeStamp()).concat(".xlsx"),
                 "Q2_RESULT_DATA"
         );
     }

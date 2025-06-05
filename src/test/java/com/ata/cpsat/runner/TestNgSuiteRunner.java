@@ -5,6 +5,7 @@ import com.ata.cpsat.framework.builder.FirefoxProfileBuilder;
 import com.ata.cpsat.framework.driver.DriverFactory;
 import com.ata.cpsat.framework.enums.Browser;
 import com.ata.cpsat.framework.helper.SyncHelper;
+import com.ata.cpsat.framework.utility.FileUtility;
 import com.ata.cpsat.framework.utility.SystemUtility;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.logging.log4j.LogManager;
@@ -22,7 +23,8 @@ public class TestNgSuiteRunner {
     private static final Logger logger = LogManager.getLogger(TestNgSuiteRunner.class.getName());
     private final String FILE_SEPARATOR = SystemUtility.getFileSeparator();
     private final String USER_DIR = SystemUtility.getUserDirectory();
-    public final String SCREENSHOT_DIR = USER_DIR.concat(FILE_SEPARATOR).concat("screenshot").concat(FILE_SEPARATOR);
+    public final String SCREENSHOT_DIR = USER_DIR.concat(FILE_SEPARATOR).concat("result-data")
+            .concat(FILE_SEPARATOR).concat("screenshot").concat(FILE_SEPARATOR);
 
     @BeforeTest(alwaysRun = true)
     @Parameters({"browser-name"})
@@ -47,6 +49,8 @@ public class TestNgSuiteRunner {
                 .initBrowser(StringUtils.isBlank(browserName) ? DEFAULT_BROWSER : Browser.getEnum(browserName.trim()));
 
         logger.info("Browser Launched and website Loaded.");
+        // create screenshot directory if not exist
+        FileUtility.createDirectoryPathIfNotExists(SCREENSHOT_DIR);
     }
 
     @AfterTest(alwaysRun = true)

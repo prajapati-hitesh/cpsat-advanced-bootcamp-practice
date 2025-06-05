@@ -15,8 +15,11 @@ public class DateUtility {
         return new SimpleDateFormat(format).format(new Date());
     }
 
+    /**
+     * @return current date time as dd-MM-yyyy_HH.mm.ss format
+     */
     public static String getCurrentTimeStamp() {
-        return new SimpleDateFormat("dd-MM-yyyy - HH.mm.ss").format(new Date());
+        return new SimpleDateFormat("dd-MM-yyyy_HH.mm.ss").format(new Date());
     }
 
     public static String getDateFormatted(Date date, String dateFormat) {
