@@ -30,7 +30,7 @@ public class TestNgSuiteRunner {
     @Parameters({"browser-name"})
     public void initializeTestNgRunEnvironment(@Optional String browserName) {
         final Browser DEFAULT_BROWSER = Browser.Chrome;
-        browserName = DEFAULT_BROWSER.getBrowserName();
+        browserName = StringUtils.isBlank(browserName) ? DEFAULT_BROWSER.getBrowserName() : browserName;
 
         ChromeOptions chromeOptions = ChromeProfileBuilder.getInstance()
                 .disableChromeLogs()
@@ -45,7 +45,7 @@ public class TestNgSuiteRunner {
                 .build();
 
         DriverFactory.getInstance()
-                .withBrowserOptionsAs((StringUtils.isBlank(browserName) && browserName.trim().equalsIgnoreCase("Firefox") ? firefoxOptions : chromeOptions))
+                .withBrowserOptionsAs(StringUtils.isBlank(browserName) && browserName.trim().equalsIgnoreCase("Firefox") ? firefoxOptions : chromeOptions)
                 .initBrowser(StringUtils.isBlank(browserName) ? DEFAULT_BROWSER : Browser.getEnum(browserName.trim()));
 
         logger.info("Browser Launched and website Loaded.");

@@ -6,21 +6,21 @@
     <test name="The Internet Login Test (Chrome)">
         <parameter name="browser-name" value="Chrome"/>
         <classes>
-            <class name="testng.test.com.ata.cpsat.framework.TheInternetLoginTestNgTest"/>
+            <class name="com.ata.cpsat.boilerplate.test.testng.TheInternetLoginTestNgTest"/>
         </classes>
     </test>
 
     <test name="The Internet Login Test (Firefox)">
         <parameter name="browser-name" value="Firefox"/>
         <classes>
-            <class name="testng.test.com.ata.cpsat.framework.TheInternetLoginTestNgTest"/>
+            <class name="com.ata.cpsat.boilerplate.test.testng.TheInternetLoginTestNgTest"/>
         </classes>
     </test>
 
     <test name="The Internet Login Test (Edge)">
         <parameter name="browser-name" value="Edge"/>
         <classes>
-            <class name="testng.test.com.ata.cpsat.framework.TheInternetLoginTestNgTest"/>
+            <class name="com.ata.cpsat.boilerplate.test.testng.TheInternetLoginTestNgTest"/>
         </classes>
     </test>
 </suite>

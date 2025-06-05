@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd" >
+
+<suite name="CPSAT Advanced - Mock Exam Set A" parallel="tests">
+    <test name="Mock Exam - Set A - 2022 (Chrome)">
+        <parameter name="browser-name" value="Chrome"/>
+        <classes>
+            <class name="com.ata.cpsat.practice.tests.testng.setA.QuestionOneTests"/>
+            <class name="com.ata.cpsat.practice.tests.testng.setA.QuestionTwoTests"/>
+            <class name="com.ata.cpsat.practice.tests.testng.setA.QuestionFourTests"/>
+        </classes>
+    </test>
+</suite>
