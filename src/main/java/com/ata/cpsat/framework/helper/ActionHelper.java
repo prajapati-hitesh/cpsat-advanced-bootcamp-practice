@@ -14,8 +14,8 @@ public class ActionHelper {
                     .build()
                     .perform();
         } catch (MoveTargetOutOfBoundsException
-                | ElementNotInteractableException
-                | StaleElementReferenceException ex) {
+                 | ElementNotInteractableException
+                 | StaleElementReferenceException ex) {
             SeleniumObjectManager
                     .getJSExecutor()
                     .executeScript("arguments[0].scrollIntoView(true);", elementToMove);
@@ -32,8 +32,8 @@ public class ActionHelper {
                     .build()
                     .perform();
         } catch (MoveTargetOutOfBoundsException
-                | ElementNotInteractableException
-                | StaleElementReferenceException ex) {
+                 | ElementNotInteractableException
+                 | StaleElementReferenceException ex) {
             SeleniumObjectManager
                     .getJSExecutor()
                     .executeScript("arguments[0].scrollIntoView(true);", elementToMove);

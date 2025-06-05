@@ -927,8 +927,8 @@ public class ElementHelper {
      */
     public boolean isElementPresentForNestedElements(By parent, By child) {
         return Objects.requireNonNull(ExpectedConditions
-                .visibilityOfNestedElementsLocatedBy(parent, child)
-                .apply(ThreadLocalSEDriver.getDriver()))
+                        .visibilityOfNestedElementsLocatedBy(parent, child)
+                        .apply(ThreadLocalSEDriver.getDriver()))
                 .stream()
                 .allMatch(WebElement::isDisplayed);
     }

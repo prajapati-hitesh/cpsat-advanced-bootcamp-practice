@@ -80,7 +80,7 @@ public class ExcelUtility {
             }
 
             // auto size columns to fit to text
-            for(int i = 0; i< headers.size(); i++) {
+            for (int i = 0; i < headers.size(); i++) {
                 sheet.autoSizeColumn(i);
             }
 

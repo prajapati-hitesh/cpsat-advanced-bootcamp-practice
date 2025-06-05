@@ -96,20 +96,20 @@ public class QuestionFourTests extends TestNgSuiteRunner {
 
     @Test(priority = 1)
     public void challengeTwoTest() {
-       ThreadLocalSEDriver.getDriver().get("https://mockexam1cpsat.agiletestingalliance.org/index.php/challenge-2/");
+        ThreadLocalSEDriver.getDriver().get("https://mockexam1cpsat.agiletestingalliance.org/index.php/challenge-2/");
 
-       SeleniumObjectManager.getWaitObject(Duration.ofSeconds(60))
-                       .until(ExpectedConditions.textToBePresentInElementLocated(
-                               By.className("entry-title"),
-                               "Challenge 2"
-                       ));
+        SeleniumObjectManager.getWaitObject(Duration.ofSeconds(60))
+                .until(ExpectedConditions.textToBePresentInElementLocated(
+                        By.className("entry-title"),
+                        "Challenge 2"
+                ));
 
-       logger.info("---------------------------- Printing Speaker Names ----------------------------");
-       ThreadLocalSEDriver.getDriver().findElements(By.className("elementor-heading-title"))
-               .stream().filter(WebElement::isDisplayed)
-               .toList().forEach(titleElement -> {
-                   logger.info(ElementHelper.getInstance().getText(titleElement));
-               });
+        logger.info("---------------------------- Printing Speaker Names ----------------------------");
+        ThreadLocalSEDriver.getDriver().findElements(By.className("elementor-heading-title"))
+                .stream().filter(WebElement::isDisplayed)
+                .toList().forEach(titleElement -> {
+                    logger.info(ElementHelper.getInstance().getText(titleElement));
+                });
     }
 
     @Test(priority = 2)

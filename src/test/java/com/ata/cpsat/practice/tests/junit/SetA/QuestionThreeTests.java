@@ -17,6 +17,7 @@ import java.util.List;
 
 public class QuestionThreeTests extends JUnitSuiteRunner {
     private static final Logger logger = LogManager.getLogger(QuestionThreeTests.class);
+
     @Test
     public void searchAndReturnParticipantDetails() {
         ThreadLocalSEDriver.getDriver().get("https://mockexam1cpsat.agiletestingalliance.org/");

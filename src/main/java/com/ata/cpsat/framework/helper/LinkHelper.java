@@ -12,6 +12,7 @@ import java.net.URL;
 
 public class LinkHelper {
     private static final Logger logger = LogManager.getLogger(LinkHelper.class.getName());
+
     public static boolean isBrokenLink(String url) {
         boolean isValid = true;
         int statusCode = 0;
@@ -53,7 +54,7 @@ public class LinkHelper {
             hasWidth = Integer.parseInt(imageElement.getAttribute("naturalWidth")) > 0;
             hasHeight = Integer.parseInt(imageElement.getAttribute("naturalHeight")) > 0;
 
-            if(statusCode == 200) {
+            if (statusCode == 200) {
                 isBroken = !hasHeight && !hasWidth;
             } else {
                 isBroken = true;
