@@ -15,7 +15,7 @@ import org.openqa.selenium.chrome.ChromeOptions;
 
 
 @RunWith(JUnitPlatform.class)
-@SelectPackages("com.ata.cpsat.test.junit")
+@SelectPackages("com.ata.cpsat.practice.tests.junit")
 public class JUnitSuiteRunner {
     private static final Logger logger = LogManager.getLogger(JUnitSuiteRunner.class.getName());
     private static final String FILE_SEPARATOR = SystemUtility.getFileSeparator();
@@ -31,7 +31,6 @@ public class JUnitSuiteRunner {
                 .disableInfoBars()
                 .downloadDirectoryAs(SystemUtility.getDefaultTempFilePath())
                 .disableDefaultBrowserCheck()
-               // .withExtension(USER_DIR.concat(FILE_SEPARATOR).concat("browser-extension").concat(FILE_SEPARATOR).concat("Ultimate AdBlocker_2_2_6_0.crx"))
                 .build();
 
         DriverFactory.getInstance()

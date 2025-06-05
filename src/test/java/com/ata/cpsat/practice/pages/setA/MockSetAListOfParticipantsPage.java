@@ -21,7 +21,7 @@ public class MockSetAListOfParticipantsPage {
     private final By searchInput = By.xpath("//input[@aria-label='Search in Table']");
     private final By searchButton = By.xpath("//button[@aria-label='Search']");
 
-    public List<Pair<String, String>> searchAndGetActualParticipantDetails(String name, String designation, String organization) {
+    private void performSearch(String searchParameter) {
         SeleniumObjectManager.getWaitObject(Duration.ofSeconds(60))
                 .until(ExpectedConditions.and(
                         ExpectedConditions.visibilityOfElementLocated(searchInput),
@@ -32,11 +32,79 @@ public class MockSetAListOfParticipantsPage {
             SyncHelper.hardWait(Duration.ofSeconds(1));
         }
         // search for the participants
-        ElementHelper.getInstance().sendKeys(searchInput, name);
+        ElementHelper.getInstance().sendKeys(searchInput, searchParameter);
         ElementHelper.getInstance().click(searchButton);
         SyncHelper.hardWait(Duration.ofSeconds(3));
+    }
 
-        // get the matching row
+    public List<String> searchParticipantName(String participantName) {
+        List<String> matchedParticipants = new ArrayList<>();
+        // search using participants name
+        performSearch(participantName);
+
+        List<WebElement> rowElements = ThreadLocalSEDriver.getDriver()
+                .findElement(By.tagName("table"))
+                .findElement(By.tagName("tbody"))
+                .findElements(By.tagName("tr"))
+                .stream().filter(WebElement::isDisplayed)
+                .toList();
+
+        if (!rowElements.isEmpty()) {
+            for (WebElement eachRowEle : rowElements) {
+                // get columns
+                List<WebElement> colElements = eachRowEle.findElements(By.tagName("td"))
+                        .stream().filter(WebElement::isDisplayed)
+                        .toList();
+
+                if (!colElements.isEmpty()) {
+                    String actualParticipantName = ElementHelper.getInstance().getText(colElements.get(1));
+                    if (actualParticipantName.toUpperCase().contains(participantName.toUpperCase())) {
+                        matchedParticipants.add(actualParticipantName);
+                    }
+                }
+
+                // To Do: implement logic to navigate between pages when record are more and get their text
+            }
+        }
+        return matchedParticipants;
+    }
+
+    public List<String> searchParticipantDesignation(String participantName) {
+        List<String> matchedDesignation = new ArrayList<>();
+        // search using participants name
+        performSearch(participantName);
+
+        List<WebElement> rowElements = ThreadLocalSEDriver.getDriver()
+                .findElement(By.tagName("table"))
+                .findElement(By.tagName("tbody"))
+                .findElements(By.tagName("tr"))
+                .stream().filter(WebElement::isDisplayed)
+                .toList();
+
+        if (!rowElements.isEmpty()) {
+            for (WebElement eachRowEle : rowElements) {
+                // get columns
+                List<WebElement> colElements = eachRowEle.findElements(By.tagName("td"))
+                        .stream().filter(WebElement::isDisplayed)
+                        .toList();
+
+                // get value from designation column and add it to list
+                matchedDesignation.add(ElementHelper.getInstance().getText(colElements.get(2)));
+
+                // To Do: implement a logic to return only those designation where the name matches the search string
+
+                // To Do: Also implement logic to navigate between pages when record are more and get their text
+            }
+        }
+        return matchedDesignation;
+    }
+
+    public List<Pair<String, String>> searchAndGetActualParticipantDetails(String name, String designation, String organization) {
+
+        // search using participants name
+        performSearch(name);
+
+        // get matching row elements
         List<WebElement> matchingElement = ThreadLocalSEDriver.getDriver()
                 .findElements(By.xpath("//td[normalize-space()='" + name + "']//parent::tr"))
                 .stream().filter(WebElement::isDisplayed).toList();
